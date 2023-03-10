@@ -60,7 +60,8 @@ app.delete('/movies/:id', async (req, res) => {
     res.status(404).json({ message: 'Movie not found' });
   }
   movies.splice(indexDeleteMovie, 1);
-  res.status(200).json(movies);
+  await fs.writeFile('./src/movies.json', JSON.stringify(movies), null, 2);
+  res.status(200).json({ message: 'Filme deletado com sucesso' });
 });
 
 module.exports = app;
