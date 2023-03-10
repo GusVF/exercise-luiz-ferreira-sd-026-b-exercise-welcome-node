@@ -33,5 +33,10 @@
     "id": 7,
     "movie": "Meninas Malvadas",
     "price": 3
+  },
+  {
+    "id": 8,
+    "movie": "Harry Potter",
+    "price": 10
   }
 ]

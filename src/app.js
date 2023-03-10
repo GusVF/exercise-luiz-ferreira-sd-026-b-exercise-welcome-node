@@ -43,13 +43,24 @@ app.put('/movies/:id', async (req, res) => {
   const movies = await readJsonData(moviePath);
   const indexUpDateMovie = movies.findIndex((film) => film.id === Number(id));
   if (indexUpDateMovie === -1) {
-    res.status(404).json({ message: 'Team not found' });
+    res.status(404).json({ message: 'Movie not found' });
   }
   // console.log('sou console.log');
   movies[indexUpDateMovie].movie = movie;
   movies[indexUpDateMovie].price = price;
   await fs.writeFile('./src/movies.json', JSON.stringify(movies), null, 2);
   res.status(200).json(movies[indexUpDateMovie]);
+});
+
+app.delete('/movies/:id', async (req, res) => {
+  const { id } = req.params;
+  const movies = await readJsonData(moviePath);
+  const indexDeleteMovie = movies.findIndex((film) => film.id === Number(id));
+  if (indexDeleteMovie === -1) {
+    res.status(404).json({ message: 'Movie not found' });
+  }
+  movies.splice(indexDeleteMovie, 1);
+  res.status(200).json(movies);
 });
 
 module.exports = app;
